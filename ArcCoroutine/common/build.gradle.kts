@@ -4,19 +4,19 @@ import org.jetbrains.kotlin.config.KotlinCompilerVersion
 plugins {
     id("com.android.library")
     kotlin("android")
-    kotlin("android.extensions")
+    kotlin("android.extensions") //废弃
 }
 
 android {
-    compileSdkVersion(29)
-    buildToolsVersion("29.0.0")
+    compileSdkVersion(BuildConfig.compileSdkVersion)
+    buildToolsVersion(BuildConfig.buildToolsVersion)
 
 
     defaultConfig {
-        minSdkVersion(16)
-        targetSdkVersion(29)
-        versionCode = 1
-        versionName = "1.0"
+        minSdkVersion(BuildConfig.minSdkVersion)
+        targetSdkVersion(BuildConfig.targetSdkVersion)
+        versionCode = BuildConfig.versionCode
+        versionName = BuildConfig.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -31,6 +31,9 @@ android {
     }
 
     androidExtensions { isExperimental = true }
+    buildFeatures{
+        viewBinding=true
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -38,7 +41,7 @@ android {
 
 }
 
-projectGeneralDeps(KotlinCompilerVersion.VERSION)
+generalCommonDeps(KotlinCompilerVersion.VERSION)
 
 api(
     Coroutines.kotlinx_coroutines_core,
@@ -47,21 +50,23 @@ api(
     Okttp.PersistentCookieJar,
     Okttp.okhttp3_logging_interceptor,
 
-    Deps.timber,
+    HelperUtil.timber,
     Deps.appcompat,
 
     Lifecycle.lifecycle_viewmodel_ktx,
     Lifecycle.lifecycle_common_java8,
     Lifecycle.lifecycle_livedata_ktx,
 
-    Recyclerview.recyclerview,
-    Recyclerview.recyclerview_selection,
-
+    Widget.RecyclerView.recyclerview,
+    Widget.RecyclerView.recyclerview_selection,
+    Widget.viewpager2,
     Koin.koin_core
 
 )
 
 cmpOnly(
-    Image.picasso
+    Image.picasso,
+    Widget.paging_runtime
 )
+
 

@@ -1,6 +1,7 @@
 package com.cwl.common.widget.recyclerview.multitype
 
 import android.view.ViewGroup
+import androidx.viewbinding.ViewBinding
 
 /**
 
@@ -9,7 +10,8 @@ import android.view.ViewGroup
  * @Date 2019-09-18 10:31
 
  */
-open class QuickAdapter(items: List<Any> = emptyList()):MultiTypeAdapter<CommonViewHolder>(items) {
+//kotlinx.android.extensions 废弃
+open class QuickAdapter<T>(items: List<T> = emptyList()):MultiTypeAdapter<CommonViewHolder,T>(items) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommonViewHolder {
         return CommonViewHolder(
@@ -18,3 +20,4 @@ open class QuickAdapter(items: List<Any> = emptyList()):MultiTypeAdapter<CommonV
         )
     }
 }
+

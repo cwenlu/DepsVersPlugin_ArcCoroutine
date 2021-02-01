@@ -8,6 +8,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.Response
 import okio.Okio
+import okio.buffer
+import okio.sink
 import java.io.File
 import kotlin.coroutines.CoroutineContext
 
@@ -22,17 +24,17 @@ inline fun <reified T> Response.convert(noinline converter: (Response.() -> T)? 
     }
 
 
-fun Response.body2str(): String = body()?.string() ?: throw RuntimeException("convert2str failure")
+fun Response.body2str(): String = body?.string() ?: throw RuntimeException("convert2str failure")
 
 inline fun <reified T> Response.body2Bean(): T =
     body2str().json2Bean<T>() ?: throw RuntimeException("body2Bean failure")
 
 fun Response.body2File(file: File,progressListener: ProgressListener?):File{
     FileUtil.createNewFile(file.absolutePath)
-    var body=body()?:throw NullPointerException("Response body is null: $this")
+    var body=body?:throw NullPointerException("Response body is null: $this")
     var contentLength = body.contentLength()
-    var sink = Okio.buffer(Okio.sink(file))
-    var buffer = sink.buffer()
+    var sink = file.sink().buffer()
+    var buffer = sink.buffer
     var bufferSize=200*1024 //200kb
     var source = body.source()
     var len=0

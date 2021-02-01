@@ -6,9 +6,9 @@ import com.cwl.common.exts.toMap
 import com.cwl.okhttpdsl.http.config.OkHttpConfig
 import com.cwl.okhttpdsl.http.config.RequestBuilder
 
-fun String.http()= RequestBuilder(this)
+fun String.rb()= RequestBuilder(this)
 
-fun RequestParams.http()=RequestBuilder(url).params(this.toMap())
+fun RequestParams.rb()=RequestBuilder(url).params(this.toMap())
 
 inline fun <reified R:RequestParams> R.httpJson()=RequestBuilder(url).json(this)
 

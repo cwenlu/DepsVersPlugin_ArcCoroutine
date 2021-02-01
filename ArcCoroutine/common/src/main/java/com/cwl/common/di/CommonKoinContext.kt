@@ -30,7 +30,7 @@ object CommonKoinContext {
 
 val koin=CommonKoinContext.koinApp.koin
 
-
+//除了直接使用koin,也可以继承这个类方便直接使用
 open class OkHttpKoinComponent : KoinComponent {
     override fun getKoin(): Koin =koin
 }

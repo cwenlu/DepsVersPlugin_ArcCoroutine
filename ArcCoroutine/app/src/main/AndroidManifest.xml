@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.cwl.arccoroutine">
+        xmlns:tools="http://schemas.android.com/tools"
+        package="com.cwl.arccoroutine">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
             android:name=".App"
@@ -15,15 +16,48 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".itemtouchhelper.UseItemTouchHelperActivity">
-        </activity>
+        <activity android:name=".customview.SimpleUseDragHelper1Activity"></activity>
+        <activity android:name=".customview.SimpleUseViewDragHelperActivity" />
+        <activity android:name=".customview.CustomViewMainActivity" />
+        <activity android:name=".test.rv.SnapHelperActivity" />
+        <activity android:name=".test.viewpager2.ViewPager2MainActivity" />
+        <activity android:name=".wanandroid.ui.hotarticles.HotArticlesPagingActivity" />
+        <activity android:name=".wanandroid.ui.hotarticles.HotArticlesPagingActivity2" />
+        <activity android:name=".wanandroid.ui.hotarticles.HotArticlesActivity" />
+        <activity android:name=".wanandroid.ui.WanMainActivity" />
+        <activity android:name=".test.paging.ui.PagingActivity" />
+        <activity android:name=".test.rv.UseItemTouchHelperActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity> <!-- tools:node="merge"处理合并 -->
+        <provider
+                android:name="androidx.startup.InitializationProvider"
+                android:authorities="${applicationId}.androidx-startup"
+                android:exported="false"
+                tools:node="merge">
+
+            <!-- 自动初始化 -->
+            <meta-data
+                    android:name="com.cwl.arccoroutine.test.startup.LibraryB"
+                    android:value="androidx.startup" />
+
+            <!--
+            手动初始化（也是延迟初始化）
+            禁用单个组件的自动初始化，需要在 <meta-data> 标签内添加 tools:node="remove" 清单合并工具会将它从清单文件中删除。
+            禁用所有组件初始化，需要在 provider 标签内添加 tools:node="remove" 清单合并工具会将它从清单文件中删除
+            在需要初始化的地方 AppInitializer.getInstance(context).initializeComponent
+            -->
+            <!--
+                <meta-data
+                    android:name="com.cwl.arccoroutine.test.startup_test.LibraryB"
+                    tools:node="remove"
+                    android:value="androidx.startup" />
+            -->
+        </provider>
     </application>
 
 </manifest>

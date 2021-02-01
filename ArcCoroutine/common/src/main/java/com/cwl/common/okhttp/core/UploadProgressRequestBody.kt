@@ -23,7 +23,7 @@ class UploadProgressRequestBody @JvmOverloads constructor(var requestBody: Reque
 
     override fun writeTo(sink: BufferedSink) {
         var countingSink=CountingSink(sink)
-        var bufferedSink = Okio.buffer(countingSink)
+        var bufferedSink = countingSink.buffer()
         requestBody.writeTo(bufferedSink)
         bufferedSink.flush()
     }

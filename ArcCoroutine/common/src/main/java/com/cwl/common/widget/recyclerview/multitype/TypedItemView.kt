@@ -2,6 +2,7 @@ package com.cwl.common.widget.recyclerview.multitype
 
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.selection.SelectionTracker
+import androidx.recyclerview.widget.RecyclerView
 
 /**
 
@@ -15,10 +16,10 @@ import androidx.recyclerview.selection.SelectionTracker
  *           {@link #createLongStorage()}
 
  */
-abstract class TypedItemView<T>(@LayoutRes val layoutId:Int,val selectionTracker: SelectionTracker<*>?=null) {
+abstract class TypedItemView<VH:RecyclerView.ViewHolder,T>(@LayoutRes val layoutId:Int,val selectionTracker: SelectionTracker<*>?=null) {
 
     abstract fun isForViewType(item:T,position:Int):Boolean
 
-    abstract fun onBindViewHolder(holder: CommonViewHolder, t:T, position: Int)
+    abstract fun onBindViewHolder(holder: VH, t:T, position: Int)
 
 }

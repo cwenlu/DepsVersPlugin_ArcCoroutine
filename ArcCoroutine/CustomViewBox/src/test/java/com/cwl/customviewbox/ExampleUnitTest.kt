@@ -1,11 +1,8 @@
-package com.cwl.arccoroutine
+package com.cwl.customviewbox
 
-import com.cwl.common.coroutine.flatMap
-import com.cwl.common.exts.toDateMills
-import kotlinx.coroutines.CoroutineStart
-import kotlinx.coroutines.async
-import kotlinx.coroutines.runBlocking
 import org.junit.Test
+
+import org.junit.Assert.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -15,11 +12,6 @@ import org.junit.Test
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
-
+        assertEquals(4, 2 + 2)
     }
-
-
 }
-
-
-

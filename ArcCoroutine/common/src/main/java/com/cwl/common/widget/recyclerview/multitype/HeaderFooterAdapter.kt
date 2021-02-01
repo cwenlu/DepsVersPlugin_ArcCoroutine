@@ -4,6 +4,7 @@ import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.viewbinding.ViewBinding
 
 /**
 
@@ -12,27 +13,28 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
  * @Date 2019-09-04 19:54
  *
  *  header footer 包装
+ *  一般也不需要再定义ViewHolder，这里直接用定义好的了，不再像MultiTypeAdapter那样定义
  */
-class HeaderFooterAdapter(items: List<Any> = emptyList()) : QuickAdapter(items) {
+class HeaderFooterAdapter<T>(items: List<T> = emptyList()) : QuickAdapter<T>(items) {
     companion object {
         const val TYPE_HEADER_VIEW = Int.MIN_VALUE
         const val TYPE_FOOTER_VIEW = Int.MIN_VALUE / 2
     }
 
-    private val headers = arrayListOf<Any>()
-    private val footers = arrayListOf<Any>()
+    private val headers = arrayListOf<T>()
+    private val footers = arrayListOf<T>()
 
 
-    fun <T> addHeaderView(items: List<T>, header: TypedItemView<T>) {
-        headers.addAll(items as List<Any>)
+    fun addHeaderView(items: List<T>, header: TypedItemView<CommonViewHolder,T>) {
+        headers.addAll(items)
         register(headerViewCount() + TYPE_HEADER_VIEW, header)
     }
 
-    fun <T> addHeaderView(
+    fun addHeaderView(
         items: List<T>, @LayoutRes layoutId: Int,
         onBindViewHolder: (holder: CommonViewHolder, t: T, position: Int) -> Unit
     ) {
-        addHeaderView(items, object : TypedItemView<T>(layoutId) {
+        addHeaderView(items, object : TypedItemView<CommonViewHolder,T>(layoutId) {
             override fun isForViewType(item: T, position: Int): Boolean = position < items.size
 
             override fun onBindViewHolder(holder: CommonViewHolder, t: T, position: Int) =
@@ -41,23 +43,23 @@ class HeaderFooterAdapter(items: List<Any> = emptyList()) : QuickAdapter(items) 
         })
     }
 
-    fun <T> addHeaderView(
+    fun  addHeaderView(
         item: T, @LayoutRes layoutId: Int,
         onBindViewHolder: (holder: CommonViewHolder, t: T, position: Int) -> Unit
     ) =
         addHeaderView(arrayListOf(item), layoutId, onBindViewHolder)
 
 
-    fun <T> addFooterView(items: List<T>, footer: TypedItemView<T>) {
-        footers.addAll(items as List<Any>)
+    fun  addFooterView(items: List<T>, footer: TypedItemView<CommonViewHolder,T>) {
+        footers.addAll(items)
         register(footerViewCount() + TYPE_FOOTER_VIEW, footer)
     }
 
-    fun <T> addFooterView(
+    fun  addFooterView(
         items: List<T>, @LayoutRes layoutId: Int,
         onBindViewHolder: (holder: CommonViewHolder, t: T, position: Int) -> Unit
     ) {
-        addFooterView(items, object : TypedItemView<T>(layoutId) {
+        addFooterView(items, object : TypedItemView<CommonViewHolder,T>(layoutId) {
             override fun isForViewType(item: T, position: Int): Boolean = position >= items.size + footerViewCount()
 
             override fun onBindViewHolder(holder: CommonViewHolder, t: T, position: Int) =
@@ -66,7 +68,7 @@ class HeaderFooterAdapter(items: List<Any> = emptyList()) : QuickAdapter(items) 
         })
     }
 
-    fun <T> addFooterView(
+    fun  addFooterView(
         item: T, @LayoutRes layoutId: Int,
         onBindViewHolder: (holder: CommonViewHolder, t: T, position: Int) -> Unit
     )=addFooterView(arrayListOf(item), layoutId, onBindViewHolder)

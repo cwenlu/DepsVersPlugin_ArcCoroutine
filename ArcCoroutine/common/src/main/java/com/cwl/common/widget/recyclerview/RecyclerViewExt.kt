@@ -1,4 +1,4 @@
-package com.cwl.common.exts
+package com.cwl.common.widget.recyclerview
 
 import android.os.Parcelable
 import android.view.*
@@ -16,6 +16,8 @@ import com.cwl.common.widget.recyclerview.multitype.MultiTypeAdapter
 import com.cwl.common.widget.recyclerview.multitype.HeaderFooterAdapter
 import com.cwl.common.widget.recyclerview.itemtouch.ItemMoveSwipeCallbackAdapter
 import com.cwl.common.widget.recyclerview.itemtouch.SimpleItemTouchHelperCallback
+import com.cwl.common.widget.recyclerview.multitype2.HeaderFooterAdapter2
+import com.cwl.common.widget.recyclerview.multitype2.MultiTypeAdapter2
 import com.cwl.common.widget.recyclerview.selection.ItemDetailsLookup4T
 import com.cwl.common.widget.recyclerview.selection.ItemKeyProvider4T
 
@@ -28,7 +30,7 @@ import com.cwl.common.widget.recyclerview.selection.ItemKeyProvider4T
 
  */
 
-
+// https://blog.csdn.net/u014651216/article/details/53256985
 interface OnItemClickListener {
     fun onItemClick(viewHolder: RecyclerView.ViewHolder, position: Int)
     fun onItemLongClick(viewHolder: RecyclerView.ViewHolder, position: Int)
@@ -59,7 +61,7 @@ fun RecyclerView.onItemLongClick(onItemLongClick: (RecyclerView.ViewHolder, Int)
     })
 }
 
-private fun RecyclerView.addItemClickListener(listener: OnItemClickListener) {
+fun RecyclerView.addItemClickListener(listener: OnItemClickListener) {
 
     val gestureDetector = GestureDetectorCompat(context, object : GestureDetector.SimpleOnGestureListener() {
         override fun onSingleTapUp(e: MotionEvent): Boolean {
@@ -89,7 +91,63 @@ private fun RecyclerView.addItemClickListener(listener: OnItemClickListener) {
     })
 }
 
+fun RecyclerView.onItemClick2(onItemClick: (RecyclerView.ViewHolder, Int) -> Unit) {
+    addItemClickListener2(object : OnItemClickListener {
+        override fun onItemClick(viewHolder: RecyclerView.ViewHolder, position: Int) {
+            onItemClick.invoke(viewHolder, position)
+        }
 
+        override fun onItemLongClick(viewHolder: RecyclerView.ViewHolder, position: Int) {
+        }
+    })
+}
+
+fun RecyclerView.onItemLongClick2(onItemLongClick: (RecyclerView.ViewHolder, Int) -> Unit) {
+    addItemClickListener2(object : OnItemClickListener {
+        override fun onItemClick(viewHolder: RecyclerView.ViewHolder, position: Int) {
+        }
+
+        override fun onItemLongClick(viewHolder: RecyclerView.ViewHolder, position: Int) {
+            onItemLongClick.invoke(viewHolder, position)
+        }
+    })
+}
+
+fun RecyclerView.addItemClickListener2(listener: OnItemClickListener) {
+    val attachListener=object:RecyclerView.OnChildAttachStateChangeListener{
+        override fun onChildViewAttachedToWindow(view: View) {
+            view.setOnClickListener {
+                listener.onItemClick(getChildViewHolder(view), getChildAdapterPosition(view))
+            }
+
+            view.setOnLongClickListener {
+                listener.onItemLongClick(getChildViewHolder(view), getChildAdapterPosition(view))
+                true
+            }
+        }
+
+        override fun onChildViewDetachedFromWindow(view: View) {
+        }
+
+    }
+    addOnChildAttachStateChangeListener(attachListener)
+}
+
+/**
+ * 处理item 或者内部view事件
+ */
+fun RecyclerView.addItemActionProcessListener(attachStateChange:(viewHolder: RecyclerView.ViewHolder, position: Int)->Unit){
+    val attachListener=object:RecyclerView.OnChildAttachStateChangeListener{
+        override fun onChildViewAttachedToWindow(view: View) {
+            attachStateChange(getChildViewHolder(view), getChildAdapterPosition(view))
+        }
+
+        override fun onChildViewDetachedFromWindow(view: View) {
+        }
+
+    }
+    addOnChildAttachStateChangeListener(attachListener)
+}
 
 /**
  * 设置layoutmanager
@@ -157,13 +215,25 @@ fun RecyclerView.gridDivider(@ColorInt color: Int?=null, @Px rowGap: Int, @Px co
     addItemDecoration(object : UniversalItemDecoration() {
         override fun getItemOffsets(position: Int,spanIndex:Int?): Decoration? {
             var headerCount=0
-            (adapter as? HeaderFooterAdapter)?.apply {
-                headerCount=headerViewCount()
-                if(position<headerViewCount() || position>=items.size+headerViewCount()){
-                    return null
+            //直接简单修改兼容新的viewbinding
+            if(adapter is MultiTypeAdapter<*, *>){
+                (adapter as? HeaderFooterAdapter<*>)?.apply {
+                    headerCount=headerViewCount()
+                    if(position<headerViewCount() || position>=items.size+headerViewCount()){
+                        return null
+                    }
                 }
+                return createColorDecoration(position-headerCount,spanIndex,(adapter as MultiTypeAdapter<*, *>).items.size)
+            }else{
+                (adapter as? HeaderFooterAdapter2<*,*>)?.apply {
+                    headerCount=headerViewCount()
+                    if(position<headerViewCount() || position>=items.size+headerViewCount()){
+                        return null
+                    }
+                }
+                return createColorDecoration(position-headerCount,spanIndex,(adapter as MultiTypeAdapter2<*, *>).items.size)
             }
-            return createColorDecoration(position-headerCount,spanIndex,(adapter as MultiTypeAdapter).items.size)
+
         }
 
 
@@ -285,6 +355,11 @@ fun <T> RecyclerView.createSelectionTracker(items:List<T>,storageStrategy: Stora
     ItemDetailsLookup4T<T>(this,items), storageStrategy
 ).withSelectionPredicate(SelectionPredicates.createSelectAnything()).build()
 
+
+
+fun RecyclerView.setupSnapHelper(snapHelper: SnapHelper){
+    snapHelper.attachToRecyclerView(this)
+}
 
 /**
  * 滚动到底部回调

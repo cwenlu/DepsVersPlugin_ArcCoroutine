@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
 import kotlinx.android.extensions.LayoutContainer
 
 /**
@@ -14,6 +15,7 @@ import kotlinx.android.extensions.LayoutContainer
  * @Date 2019-08-26 15:14
 
  */
+//kotlinx.android.extensions 废弃
 open class CommonViewHolder (itemView: View):RecyclerView.ViewHolder(itemView),LayoutContainer {
     override val containerView: View?
         get() = itemView
@@ -22,3 +24,6 @@ open class CommonViewHolder (itemView: View):RecyclerView.ViewHolder(itemView),L
 
 
 }
+
+
+

@@ -8,6 +8,9 @@ import com.cwl.common.okhttp.core.UploadProgressRequestBody
 import com.cwl.okhttpdsl.http.exts.await
 import com.cwl.okhttpdsl.http.util.MediaTypes
 import okhttp3.*
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
 class RequestBuilder @JvmOverloads constructor(
@@ -116,10 +119,9 @@ class RequestBuilder @JvmOverloads constructor(
 
 
     private fun buildGetRequest(): Request {
-        var parse: HttpUrl? = HttpUrl.parse(
-            if (url.startsWith("http://") || url.startsWith("https://")) url
-            else okHttpConfig.baseUrl + url
-        ) ?: throw RuntimeException("HttpUrl.parse error")
+        var parse: HttpUrl? = (if (url.startsWith("http://") || url.startsWith("https://")) url
+        else okHttpConfig.baseUrl + url
+                ).toHttpUrlOrNull() ?: throw RuntimeException("HttpUrl.parse error")
         var build = parse!!.newBuilder().apply {
             params.forEach {
                 addQueryParameter(it.first, "${it.second}")
@@ -151,15 +153,21 @@ class RequestBuilder @JvmOverloads constructor(
             when (it.second) {
                 is File -> (it.second as File).apply {
                     val fileType = OkHttpConfig.getMimeType(name)
-                    addFormDataPart(it.first, name, RequestBody.create(MediaType.parse(fileType), this))
+                    addFormDataPart(it.first, name,
+                        this.asRequestBody(fileType.toMediaTypeOrNull())
+                    )
                 }
                 is Array<*> -> (it.second as? Array<File>)?.forEach { file ->
                     val fileType = OkHttpConfig.getMimeType(file.name)
-                    addFormDataPart(it.first, file.name, RequestBody.create(MediaType.parse(fileType), file))
+                    addFormDataPart(it.first, file.name,
+                        file.asRequestBody(fileType.toMediaTypeOrNull())
+                    )
                 }
                 is List<*> -> (it.second as? List<File>)?.forEach { file ->
                     val fileType = OkHttpConfig.getMimeType(file.name)
-                    addFormDataPart(it.first, file.name, RequestBody.create(MediaType.parse(fileType), file))
+                    addFormDataPart(it.first, file.name,
+                        file.asRequestBody(fileType.toMediaTypeOrNull())
+                    )
                 }
                 else -> addFormDataPart(it.first, "${it.second}")
             }

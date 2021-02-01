@@ -11,10 +11,10 @@ import okhttp3.Response
 class UploadProgressInterceptor(var progressListener: ProgressListener) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         var originalRequet = chain.request()
-        if(originalRequet.body()==null) return chain.proceed(originalRequet)
+        if(originalRequet.body ==null) return chain.proceed(originalRequet)
 
         var progressRequest = originalRequet.newBuilder()
-            .method(originalRequet.method(), UploadProgressRequestBody(originalRequet.body()!!, progressListener))
+            .method(originalRequet.method, UploadProgressRequestBody(originalRequet.body!!, progressListener))
             .build()
         return chain.proceed(progressRequest)
     }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.cwl.customviewbox.UseViewDragHelper.SimpleUseViewDragHelper2 xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/root"
+        tools:context=".customview.SimpleUseViewDragHelperActivity">
+    <!--main-->
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="MainView" />
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/colorAccent"/>
+    </RelativeLayout>
+    <!--panel-->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="vertical">
+        <TextView
+                android:id="@+id/tv_drag"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:gravity="center"
+                android:clickable="true"
+                android:text="drag"/>
+        <!--<ListView
+                android:id="@+id/lv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>-->
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+    </LinearLayout>
+</com.cwl.customviewbox.UseViewDragHelper.SimpleUseViewDragHelper2>

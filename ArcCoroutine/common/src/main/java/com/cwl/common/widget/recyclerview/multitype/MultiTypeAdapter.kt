@@ -13,10 +13,10 @@ import java.util.*
  * @Date 2019-08-25 19:44
 
  */
-open abstract class MultiTypeAdapter<VH:CommonViewHolder> (var items: List<Any> = emptyList()) :RecyclerView.Adapter<VH>(),
+open abstract class MultiTypeAdapter<VH: RecyclerView.ViewHolder,T> (var items: List<T> = emptyList()) :RecyclerView.Adapter<VH>(),
     ItemMoveSwipeCallbackAdapter {
 
-    protected val typedItemViewManager= TypedItemViewManager<Any>()
+    protected val typedItemViewManager= TypedItemViewManager<VH,T>()
 
     override fun getItemCount(): Int =items.size
 
@@ -28,26 +28,26 @@ open abstract class MultiTypeAdapter<VH:CommonViewHolder> (var items: List<Any> 
         return typedItemViewManager.getItemViewType(items[position],position)
     }
 
-    fun <T> register(typedItemView: TypedItemView<T>){
-        typedItemViewManager.add(typedItemView as TypedItemView<Any>)
+    fun register(typedItemView: TypedItemView<VH,T>){
+        typedItemViewManager.add(typedItemView)
     }
 
-    fun <T> register(viewType: Int,typedItemView: TypedItemView<T>){
-        typedItemViewManager.add(viewType,typedItemView as TypedItemView<Any>)
+    fun register(viewType: Int,typedItemView: TypedItemView<VH,T>){
+        typedItemViewManager.add(viewType,typedItemView)
     }
 
 
     /**
      * 单一样式
      */
-    fun <T> register(@LayoutRes layoutId:Int,onBindViewHolder:(CommonViewHolder, T, Int)->Unit){
-        typedItemViewManager.add(object : TypedItemView<T>(layoutId) {
+    fun register(@LayoutRes layoutId:Int,onBindViewHolder:(VH, T, Int)->Unit){
+        typedItemViewManager.add(object : TypedItemView<VH,T>(layoutId) {
 
             override fun isForViewType(item: T, position: Int): Boolean =true
 
-            override fun onBindViewHolder(holder: CommonViewHolder, t: T, position: Int) =onBindViewHolder(holder,t,position)
+            override fun onBindViewHolder(holder: VH, t: T, position: Int) =onBindViewHolder(holder,t,position)
 
-        } as TypedItemView<Any>)
+        })
     }
 
 

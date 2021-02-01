@@ -27,7 +27,7 @@ suspend inline fun <reified T> Call.await(file: File?=null,noinline progressList
                     else response.convert<T>()?:throw NullPointerException("Response body is null: $response")
 
                 }else{
-                    throw HttpException(response.code(),response.message())
+                    throw HttpException(response.code, response.message)
                 }
             })
         }

@@ -18,7 +18,7 @@ class OnlineCacheInterceptor @JvmOverloads constructor( cacheControlValue: Int=O
                 || contains("must-revalidate") || contains("max-age")
                 || contains("max-stale")){
 
-                Timber.i(originalResponse.headers().toString())
+                Timber.i(originalResponse.headers.toString())
                 //也可以使用CacheControl类
                 return originalResponse.newBuilder()
                     .header("Cache-Control","public, $cacheControlValue")

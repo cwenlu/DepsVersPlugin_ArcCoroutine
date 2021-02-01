@@ -1,4 +1,4 @@
-package com.cwl.arccoroutine.itemtouchhelper
+package com.cwl.arccoroutine.test.rv
 
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.cwl.common.exts.*
 import com.cwl.common.widget.recyclerview.itemtouch.SimpleItemTouchHelperCallback
-import com.cwl.common.widget.recyclerview.multitype.MultiTypeAdapter
 import com.cwl.common.widget.recyclerview.multitype.QuickAdapter
+import com.cwl.common.widget.recyclerview.setupItemTouchHelper
+import com.cwl.common.widget.recyclerview.setupLayoutManager
 
 class UseItemTouchHelperActivity : AppCompatActivity() {
     var listData = arrayListOf<String>()
@@ -28,7 +28,7 @@ class UseItemTouchHelperActivity : AppCompatActivity() {
                 }
             })
 
-        itemTouchAdapter.register<String>(android.R.layout.simple_list_item_1){ holder, t, _->
+        itemTouchAdapter.register(android.R.layout.simple_list_item_1){ holder, t, _->
             (holder.containerView as TextView).apply {
                 text=t
                 setBackgroundColor(Color.GRAY)

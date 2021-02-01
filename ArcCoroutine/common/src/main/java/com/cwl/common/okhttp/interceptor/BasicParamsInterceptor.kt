@@ -26,7 +26,7 @@ class BasicParamsInterceptor private constructor(
 
         //headers
         //map形式
-        var headerBuilder = request.headers().newBuilder()
+        var headerBuilder = request.headers.newBuilder()
         if (headersMap.isNotEmpty()) {
             headersMap.forEach {
                 headerBuilder.add(it.key, it.value)
@@ -43,13 +43,14 @@ class BasicParamsInterceptor private constructor(
 
         //params
         if (urlParamsMap.isNotEmpty()) {
-            request = injectParamsIntoUrl(request.url().newBuilder(), requestBuilder)
+            request = injectParamsIntoUrl(request.url.newBuilder(), requestBuilder)
         }
 
         var canInjectIntoBody = canInjectIntoBody(request)
         if (canInjectIntoBody.first) {
-            when (canInjectIntoBody.second?.subtype()) {
-                "x-www-form-urlencoded" -> injectParams4Form(requestBuilder,request.body()!!,canInjectIntoBody.second!!)
+            when (canInjectIntoBody.second?.subtype) {
+                "x-www-form-urlencoded" -> injectParams4Form(requestBuilder,
+                    request.body!!,canInjectIntoBody.second!!)
                 "form-data"->{
                     //
                 }
@@ -88,8 +89,8 @@ class BasicParamsInterceptor private constructor(
     }
 
     private fun canInjectIntoBody(request: Request): Pair<Boolean, MediaType?> {
-        if ("POST" != request.method()) return Pair(false, null)
-        var body: RequestBody = request.body() ?: return Pair(false, null)
+        if ("POST" != request.method) return Pair(false, null)
+        var body: RequestBody = request.body ?: return Pair(false, null)
         var contentType: MediaType = body.contentType() ?: return Pair(false, null)
         return Pair(true, contentType)
     }

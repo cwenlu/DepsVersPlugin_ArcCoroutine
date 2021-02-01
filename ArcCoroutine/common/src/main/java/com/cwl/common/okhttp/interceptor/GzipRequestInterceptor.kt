@@ -7,6 +7,7 @@ import okhttp3.Response
 import okio.BufferedSink
 import okio.GzipSink
 import okio.Okio
+import okio.buffer
 import java.io.IOException
 
 /**
@@ -15,7 +16,7 @@ import java.io.IOException
 class GzipRequestInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         var originalRequest = chain.request()
-        if(originalRequest.body()==null || originalRequest.header("Content-Encoding")==null){
+        if(originalRequest.body ==null || originalRequest.header("Content-Encoding")==null){
             return chain.proceed(originalRequest)
         }
         var compressedRequest = originalRequest.newBuilder()
@@ -23,7 +24,7 @@ class GzipRequestInterceptor : Interceptor {
 //                设置了这个需要自己处理返回流，okhttp不会自动处理gzip了
 //            .header("Accept-Encoding", "gzip")
             .header("Content-Encoding", "gzip")
-            .method(originalRequest.method(), gzip(originalRequest.body()!!))
+            .method(originalRequest.method, gzip(originalRequest.body!!))
             .build()
         return chain.proceed(compressedRequest)
 
@@ -41,7 +42,7 @@ class GzipRequestInterceptor : Interceptor {
 
             @Throws(IOException::class)
             override fun writeTo(sink: BufferedSink) {
-                val gzipSink = Okio.buffer(GzipSink(sink))
+                val gzipSink = GzipSink(sink).buffer()
                 body.writeTo(gzipSink)
                 gzipSink.close()
             }

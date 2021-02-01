@@ -1,6 +1,7 @@
 package com.cwl.common.widget.recyclerview.multitype
 
 import androidx.collection.SparseArrayCompat
+import androidx.recyclerview.widget.RecyclerView
 
 /**
 
@@ -9,8 +10,8 @@ import androidx.collection.SparseArrayCompat
  * @Date 2019-08-25 19:58
 
  */
-class TypedItemViewManager<T> {
-    private val typedItemViewPool=SparseArrayCompat<TypedItemView<T>>()
+class TypedItemViewManager<VH:RecyclerView.ViewHolder,T> {
+    private val typedItemViewPool=SparseArrayCompat<TypedItemView<VH,T>>()
 
     /**
      * 返回可用的key
@@ -28,14 +29,14 @@ class TypedItemViewManager<T> {
      * note: typedItemView 没有找到会抛出数组越界异常
      */
     @Throws(ArrayIndexOutOfBoundsException::class)
-    fun getViewTypeKey(typedItemView: TypedItemView<T>):Int=typedItemViewPool.keyAt(typedItemViewPool.indexOfValue(typedItemView))
+    fun getViewTypeKey(typedItemView: TypedItemView<VH,T>):Int=typedItemViewPool.keyAt(typedItemViewPool.indexOfValue(typedItemView))
 
-    fun add(typedItemView: TypedItemView<T>){
+    fun add(typedItemView: TypedItemView<VH,T>){
         val viewTypeKey=getUsableViewTypeKey()
         typedItemViewPool.put(viewTypeKey,typedItemView)
     }
 
-    fun add(viewTypeKey:Int,typedItemView: TypedItemView<T>){
+    fun add(viewTypeKey:Int,typedItemView: TypedItemView<VH,T>){
         if(typedItemViewPool[viewTypeKey]!=null) throw IllegalArgumentException("viewTypeKey $viewTypeKey already exist")
         typedItemViewPool.put(viewTypeKey,typedItemView)
     }
@@ -44,7 +45,7 @@ class TypedItemViewManager<T> {
         typedItemViewPool.remove(viewTypeKey)
     }
 
-    fun remove(typedItemView: TypedItemView<T>){
+    fun remove(typedItemView: TypedItemView<VH,T>){
         var indexOfValue = typedItemViewPool.indexOfValue(typedItemView)
         typedItemViewPool.removeAt(indexOfValue)
     }
@@ -66,7 +67,7 @@ class TypedItemViewManager<T> {
         throw IllegalArgumentException("not found position=$position TypedItemView")
     }
 
-    fun onBindViewHolder(holder: CommonViewHolder, t:T, position: Int){
+    fun onBindViewHolder(holder: VH, t:T, position: Int){
         var size = typedItemViewPool.size()
         for (index in 0 until size){
             var typedItemView = typedItemViewPool.valueAt(index)

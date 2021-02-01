@@ -54,7 +54,7 @@ fun LifecycleOwner.ioScope(@AutoCancelState registerAutoCancelState: Int=AutoCan
     lifecycle.addObserver(this)
 }
 
-fun LifecycleOwner.defScope(@AutoCancelState registerAutoCancelState: Int=AutoCancel.ON_DESTORY): AutoCancelableCoroutineScope=createAutoCancelableCoroutineScope(Dispatchers.Default,registerAutoCancelState).apply {
+fun LifecycleOwner.dftScope(@AutoCancelState registerAutoCancelState: Int=AutoCancel.ON_DESTORY): AutoCancelableCoroutineScope=createAutoCancelableCoroutineScope(Dispatchers.Default,registerAutoCancelState).apply {
     lifecycle.addObserver(this)
 }
 
@@ -62,7 +62,7 @@ fun LifecycleOwner.defScope(@AutoCancelState registerAutoCancelState: Int=AutoCa
 
 fun LifecycleOwner.UI(@AutoCancelState registerAutoCancelState: Int = AutoCancel.ON_DESTORY, block: suspend CoroutineScope.() -> Unit) =uiScope(registerAutoCancelState).launch(block = block)
 fun LifecycleOwner.IO(@AutoCancelState registerAutoCancelState: Int = AutoCancel.ON_DESTORY, block: suspend CoroutineScope.() -> Unit) =ioScope(registerAutoCancelState).launch(block = block)
-fun LifecycleOwner.DFT(@AutoCancelState registerAutoCancelState: Int = AutoCancel.ON_DESTORY, block: suspend CoroutineScope.() -> Unit) =defScope(registerAutoCancelState).launch(block = block)
+fun LifecycleOwner.DFT(@AutoCancelState registerAutoCancelState: Int = AutoCancel.ON_DESTORY, block: suspend CoroutineScope.() -> Unit) =dftScope(registerAutoCancelState).launch(block = block)
 
 
 suspend fun <T> withUI(block: suspend CoroutineScope.() -> T)= withContext(Dispatchers.Main,block)
