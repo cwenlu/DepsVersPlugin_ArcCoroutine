@@ -3,6 +3,7 @@ package com.cwl.arccoroutine.wanandroid.ui.hotarticles
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.observe
 import androidx.paging.LoadState
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.cwl.arccoroutine.R

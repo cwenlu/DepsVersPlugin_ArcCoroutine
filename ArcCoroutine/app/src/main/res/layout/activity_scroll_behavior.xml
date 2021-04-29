@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".customview.ScrollBehaviorActivity">
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/colorAccent"
+            app:layout_behavior="com.cwl.customviewbox.UseBehavior.HeaderBehavior"/>
+
+    <!--要实现Nested,这里必须是支持Nested的控件-->
+    <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="com.cwl.customviewbox.UseBehavior.ScrollBehavior">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="500dp"
+                    android:background="@color/design_default_color_secondary" />
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="500dp"
+                    android:background="@color/colorPrimaryDark" />
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="500dp"
+                    android:background="@color/colorPrimary" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!--放最后保证在最上面,测试方便，实际高度算好的，不需要-->
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@android:color/holo_orange_light"
+            app:layout_behavior="com.cwl.customviewbox.UseBehavior.TitleBehavior"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

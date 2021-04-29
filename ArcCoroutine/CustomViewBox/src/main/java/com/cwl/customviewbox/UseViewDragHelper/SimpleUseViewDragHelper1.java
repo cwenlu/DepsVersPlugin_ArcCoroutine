@@ -314,6 +314,8 @@ public class SimpleUseViewDragHelper1 extends ViewGroup {
             //参数控制是fling计算位置的范围限制
             mViewDragHelper.flingCapturedView(0,0,0,getHeight()-mPeekHeight);
             invalidate();
+
+            //smoothSlideViewTo 是指定view flingCapturedView和settleCapturedViewAt都是以CapturedView
         }
     }
 

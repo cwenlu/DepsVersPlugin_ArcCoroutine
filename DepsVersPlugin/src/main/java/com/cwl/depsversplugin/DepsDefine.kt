@@ -12,6 +12,9 @@ import org.gradle.kotlin.dsl.kotlin
 
  */
 
+//https://developer.android.google.cn/jetpack/androidx/migrate/class-mappings#androidsupportv7  androidx 类对照表
+//https://developer.android.google.cn/jetpack/androidx/migrate/artifact-mappings androidx 依赖对照表
+
 object Versions {
     val kotlin = "1.4.0"
     val appcompat = "1.2.0"
@@ -26,7 +29,6 @@ object Versions {
     val okhttp = "4.9.0"
     val kotlinx_coroutines_core = "1.4.2"
     val koin = "2.2.1"
-    val vbpd = "1.3.1"
     val datastore = "1.0.0-alpha05"
     val room = /*"2.2.6"*/"2.3.0-alpha04"
     val paging = "3.0.0-alpha11"
@@ -35,8 +37,19 @@ object Versions {
     val leakcanary = "2.5"
     val mapstruct_kotlin="1.3.1.2"
     val mapstruct="1.4.1.Final"
+
+    val material="1.3.0-rc01"
+
+    //widget
+    val vbpd = "1.3.1"
     val swiperefreshlayout="1.2.0-alpha01"
     val viewpager2="1.1.0-alpha01"
+    val coordinatorlayout="1.1.0"
+    val drawerlayout="1.1.1"
+    val customview="1.1.0"
+
+    //compose
+    val compose_material="1.0.0-alpha11"
 
     //classpath
     val hugo = "1.2.1"
@@ -86,6 +99,15 @@ object Widget{
     val swiperefreshlayout="androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swiperefreshlayout}"
     val paging_runtime = "androidx.paging:paging-runtime:${Versions.paging}"
     val viewpager2="androidx.viewpager2:viewpager2:${Versions.viewpager2}"
+    val coordinatorlayout="androidx.coordinatorlayout:coordinatorlayout:${Versions.coordinatorlayout}"
+    val drawerlayout="androidx.drawerlayout:drawerlayout:${Versions.drawerlayout}"
+    //ViewDragHelper子这里面,recyclerview,drawerlayout等内部都依赖了它
+    val customview="androidx.customview:customview:${Versions.customview}"
+    //原来的com.android.support:design  com.google.android.material:material-rc01 没找到
+    val material="com.google.android.material:material:${Versions.material}"
+    object Compose{
+        val material="androidx.compose.material:material:${Versions.compose_material}"
+    }
 }
 
 
@@ -268,7 +290,7 @@ fun Project.clspath(vararg deps: Any) {
 /**
  * 注册多个implementation方式的依赖 模块内使用
  */
-fun Project.impl(vararg deps: String) {
+fun Project.impl(vararg deps: Any) {
     dependencies {
         deps.forEach {
             "implementation"(it)
@@ -280,7 +302,7 @@ fun Project.impl(vararg deps: String) {
 /**
  * 注册多个api方式的依赖 会传递
  */
-fun Project.api(vararg deps: String) {
+fun Project.api(vararg deps: Any) {
     dependencies {
         deps.forEach {
             "api"(it)
@@ -291,7 +313,7 @@ fun Project.api(vararg deps: String) {
 /**
  * 注册多个编译时注解器
  */
-fun Project.kapt(vararg deps: String) {
+fun Project.kapt(vararg deps: Any) {
     dependencies {
         deps.forEach {
             "kapt"(it)
@@ -302,7 +324,7 @@ fun Project.kapt(vararg deps: String) {
 /**
  * 注册多个只编译时用的依赖
  */
-fun Project.cmpOnly(vararg deps: String) {
+fun Project.cmpOnly(vararg deps: Any) {
     dependencies {
         deps.forEach {
             "compileOnly"(it)

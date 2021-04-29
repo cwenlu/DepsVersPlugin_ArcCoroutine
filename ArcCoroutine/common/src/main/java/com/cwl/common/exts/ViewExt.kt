@@ -20,3 +20,8 @@ fun View.isViewUnder(x:Int,y:Int):Boolean{
 //    return x>=left && x<=right && y>=top && y<=bottom
     return x in left .. right && y in top .. bottom
 }
+
+//androidx.core.view 中提供了一些操作
+//val View.isGone get() = visibility==View.GONE
+
+inline val View.isVisibility get() = visibility==View.VISIBLE

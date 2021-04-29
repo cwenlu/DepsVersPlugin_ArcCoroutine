@@ -16,13 +16,20 @@ import kotlinx.coroutines.flow.onCompletion
  */
 class HotArticlesViewModel(private val hotArticlesRepository: HotArticlesRepository):ViewModel() {
     val loading=MutableLiveData(true)
-    var page=0
-    fun queryHotArticles():LiveData<List<HotArticlesVo>> = hotArticlesRepository.queryHotArticles(page++)
-        .onCompletion { loading.value=false }
-        .asLiveData(viewModelScope.coroutineContext)
+    private val page=MutableLiveData(0)
+
+    fun queryHotArticles():LiveData<List<HotArticlesVo>> = page.switchMap {
+        hotArticlesRepository.queryHotArticles(it)
+            .onCompletion { loading.value=false }
+            .asLiveData(viewModelScope.coroutineContext)
+    }
+
+    fun fetch(refresh:Boolean=true){
+        page.value=if(refresh) 0 else page.value!!+1
+    }
 
     fun queryHotArticlesPaging()=hotArticlesRepository.queryHotArticlesPaging()
         .cachedIn(viewModelScope)
-        .asLiveData(viewModelScope.coroutineContext)
+        .asLiveData(viewModelScope.coroutineContext)/*不指定CoroutineContext也可以，内部会设置main*/
 
 }

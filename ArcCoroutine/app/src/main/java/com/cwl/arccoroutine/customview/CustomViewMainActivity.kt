@@ -3,6 +3,7 @@ package com.cwl.arccoroutine.customview
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.cwl.arccoroutine.showActivity
@@ -25,6 +26,13 @@ class CustomViewMainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         listData.add("ViewDrag")
         listData.add("ViewDrag1")
+        listData.add("Behavior")
+        listData.add("SimpleNestedScrolling")
+        listData.add("SimpleScroller")
+        listData.add("NestedFling")
+        listData.add("SimpleBehavior")
+        listData.add("ScrollBehavior")
+        listData.add("FlowLayoutManager")
 
         val recyclerView = RecyclerView(this)
         recyclerView.setupLayoutManager(3)
@@ -37,10 +45,19 @@ class CustomViewMainActivity : AppCompatActivity() {
             when(i){
                 0->showActivity(SimpleUseViewDragHelperActivity::class)
                 1->showActivity(SimpleUseDragHelper1Activity::class)
+                2->showActivity(BehaviorUseActivity::class)
+                3->showActivity(SimpleNestedScrollingActivity::class)
+                4->showActivity(SimpleScollerLayoutActivity::class)
+                5->showActivity(NestedFlingActivity::class)
+                6->showActivity(SimpleBehaviorActivity::class)
+                7->showActivity(ScrollBehaviorActivity::class)
+                8->showActivity(LayoutManagerTestActivity::class)
 
             }
         }
         recyclerView.adapter=multiTypeAdapter
         setContentView(recyclerView)
+
+
     }
 }

@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.cwl.arccoroutine.customview.CustomViewMainActivity
+import com.cwl.arccoroutine.test.databinding.DataBindingActivity
 import com.cwl.arccoroutine.test.rv.UseItemTouchHelperActivity
 import com.cwl.arccoroutine.test.paging.ui.PagingActivity
 import com.cwl.arccoroutine.test.rv.SnapHelperActivity
@@ -35,6 +36,8 @@ class MainActivity : AppCompatActivity(){
         listData.add("viewpager2")
         listData.add("snaphelper")
         listData.add("customview")
+
+        listData.add("databinding")
         val recyclerView = RecyclerView(this)
         recyclerView.setupLayoutManager(3)
         recyclerView.gridDivider(2,Color.CYAN)
@@ -52,6 +55,8 @@ class MainActivity : AppCompatActivity(){
                 5->showActivity(ViewPager2MainActivity::class)
                 6->showActivity(SnapHelperActivity::class)
                 7->showActivity(CustomViewMainActivity::class)
+
+                8->showActivity(DataBindingActivity::class)
 
             }
         }

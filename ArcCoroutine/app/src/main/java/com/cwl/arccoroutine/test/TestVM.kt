@@ -3,6 +3,7 @@ package com.cwl.arccoroutine.test
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cwl.common.okhttp.rb
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import timber.log.Timber
 

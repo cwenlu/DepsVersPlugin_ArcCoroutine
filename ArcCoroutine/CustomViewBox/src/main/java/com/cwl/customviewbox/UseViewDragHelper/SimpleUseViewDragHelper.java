@@ -204,7 +204,9 @@ public class SimpleUseViewDragHelper extends ViewGroup {
         //dx : 拖动的x偏移量
         //dy : 拖动的y偏移量
         @Override
-        public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {}
+        public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
+            //eg:可以同步改动一些view的位置，大小等
+        }
 
         //当一个View被捕获到准备开始拖动时回调,
         //capturedChild : 捕获的View

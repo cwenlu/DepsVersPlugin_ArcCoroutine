@@ -50,6 +50,7 @@ android {
 
     buildFeatures{
         viewBinding=true
+        dataBinding=true
     }
     androidExtensions {
         experimental = true
@@ -83,6 +84,8 @@ dependencies {
     kapt MapStruct.mapstruct_kotlin_processor
     implementation MapStruct.mapstruct
     implementation Widget.viewpager2
+    implementation Widget.coordinatorlayout
+    implementation Widget.material
 }
 
 

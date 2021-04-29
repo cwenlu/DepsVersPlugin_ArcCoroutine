@@ -16,7 +16,15 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".customview.SimpleUseDragHelper1Activity"></activity>
+        <activity android:name=".test.databinding.DataBindingActivity"></activity>
+        <activity android:name=".customview.LayoutManagerTestActivity" />
+        <activity android:name=".customview.ScrollBehaviorActivity" />
+        <activity android:name=".customview.SimpleBehaviorActivity" />
+        <activity android:name=".customview.NestedFlingActivity" />
+        <activity android:name=".customview.SimpleScollerLayoutActivity" />
+        <activity android:name=".customview.SimpleNestedScrollingActivity" />
+        <activity android:name=".customview.BehaviorUseActivity" />
+        <activity android:name=".customview.SimpleUseDragHelper1Activity" />
         <activity android:name=".customview.SimpleUseViewDragHelperActivity" />
         <activity android:name=".customview.CustomViewMainActivity" />
         <activity android:name=".test.rv.SnapHelperActivity" />

@@ -35,5 +35,10 @@ android {
 }
 
 generalCommonDeps(KotlinCompilerVersion.VERSION)
-impl(Deps.appcompat)
-impl(Widget.RecyclerView.recyclerview)
+impl(
+    Deps.appcompat,
+    Widget.RecyclerView.recyclerview,
+    Widget.coordinatorlayout
+)
+
+cmpOnly(project(":common"))

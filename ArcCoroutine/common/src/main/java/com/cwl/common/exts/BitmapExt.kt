@@ -13,7 +13,7 @@ import android.os.Build
 
 //最低版本越来越高，差不多可以忽略
 
-/*图片大小*/
+/*图片所占内存大小*/
 val Bitmap.size
     get() = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) allocationByteCount
     else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1) byteCount
