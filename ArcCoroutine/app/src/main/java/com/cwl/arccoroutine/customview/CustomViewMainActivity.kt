@@ -3,17 +3,9 @@ package com.cwl.arccoroutine.customview
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.cwl.arccoroutine.showActivity
-import com.cwl.arccoroutine.test.paging.ui.PagingActivity
-import com.cwl.arccoroutine.test.rv.SnapHelperActivity
-import com.cwl.arccoroutine.test.rv.UseItemTouchHelperActivity
-import com.cwl.arccoroutine.test.viewpager2.ViewPager2MainActivity
-import com.cwl.arccoroutine.wanandroid.ui.hotarticles.HotArticlesActivity
-import com.cwl.arccoroutine.wanandroid.ui.hotarticles.HotArticlesPagingActivity
-import com.cwl.arccoroutine.wanandroid.ui.hotarticles.HotArticlesPagingActivity2
 import com.cwl.common.widget.recyclerview.gridDivider
 import com.cwl.common.widget.recyclerview.multitype.QuickAdapter
 import com.cwl.common.widget.recyclerview.onItemClick
@@ -33,6 +25,7 @@ class CustomViewMainActivity : AppCompatActivity() {
         listData.add("SimpleBehavior")
         listData.add("ScrollBehavior")
         listData.add("FlowLayoutManager")
+        listData.add("ConstraintLayout")
 
         val recyclerView = RecyclerView(this)
         recyclerView.setupLayoutManager(3)
@@ -52,6 +45,7 @@ class CustomViewMainActivity : AppCompatActivity() {
                 6->showActivity(SimpleBehaviorActivity::class)
                 7->showActivity(ScrollBehaviorActivity::class)
                 8->showActivity(LayoutManagerTestActivity::class)
+                9->showActivity(ConstraintLayoutActivity::class)
 
             }
         }

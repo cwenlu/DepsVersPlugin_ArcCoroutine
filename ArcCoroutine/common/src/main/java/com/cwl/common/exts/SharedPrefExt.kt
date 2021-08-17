@@ -4,6 +4,10 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.cwl.common.util.ContextProvider
 
+/**
+ * 不推荐用sp
+ */
+
 fun sharedPref(name:String="shared_pref_data",mode:Int= Context.MODE_PRIVATE)=
     ContextProvider.appCtx!!.getSharedPreferences(name,mode)
 

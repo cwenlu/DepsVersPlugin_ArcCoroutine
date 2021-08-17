@@ -35,21 +35,22 @@ object Versions {
     val startup = "1.0.0"
     val chuck = "1.1.0"
     val leakcanary = "2.5"
-    val mapstruct_kotlin="1.3.1.2"
-    val mapstruct="1.4.1.Final"
+    val mapstruct_kotlin = "1.3.1.2"
+    val mapstruct = "1.4.1.Final"
 
-    val material="1.3.0-rc01"
+    val material = "1.3.0-rc01"
 
     //widget
     val vbpd = "1.3.1"
-    val swiperefreshlayout="1.2.0-alpha01"
-    val viewpager2="1.1.0-alpha01"
-    val coordinatorlayout="1.1.0"
-    val drawerlayout="1.1.1"
-    val customview="1.1.0"
+    val swiperefreshlayout = "1.2.0-alpha01"
+    val viewpager2 = "1.1.0-alpha01"
+    val coordinatorlayout = "1.1.0"
+    val constraintlayout = "2.0.1"
+    val drawerlayout = "1.1.1"
+    val customview = "1.1.0"
 
     //compose
-    val compose_material="1.0.0-alpha11"
+    val compose_material = "1.0.0-alpha11"
 
     //classpath
     val hugo = "1.2.1"
@@ -73,7 +74,8 @@ object Okttp {
 object Coroutines {
     val kotlinx_coroutines_core =
         "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinx_coroutines_core}"
-    val kotlinx_coroutines_android="org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlinx_coroutines_core}"
+    val kotlinx_coroutines_android =
+        "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlinx_coroutines_core}"
 }
 
 object Image {
@@ -90,33 +92,38 @@ object Json {
     val moshi_kotlin_codegen = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi_kotlin}"
 }
 
-object Widget{
+object Widget {
     object RecyclerView {
         val recyclerview = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
         val recyclerview_selection =
             "androidx.recyclerview:recyclerview-selection:${Versions.recyclerview_selection}"
     }
-    val swiperefreshlayout="androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swiperefreshlayout}"
+
+    val swiperefreshlayout =
+        "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swiperefreshlayout}"
     val paging_runtime = "androidx.paging:paging-runtime:${Versions.paging}"
-    val viewpager2="androidx.viewpager2:viewpager2:${Versions.viewpager2}"
-    val coordinatorlayout="androidx.coordinatorlayout:coordinatorlayout:${Versions.coordinatorlayout}"
-    val drawerlayout="androidx.drawerlayout:drawerlayout:${Versions.drawerlayout}"
+    val viewpager2 = "androidx.viewpager2:viewpager2:${Versions.viewpager2}"
+    val coordinatorlayout =
+        "androidx.coordinatorlayout:coordinatorlayout:${Versions.coordinatorlayout}"
+    val constraintlayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintlayout}"
+    val drawerlayout = "androidx.drawerlayout:drawerlayout:${Versions.drawerlayout}"
+
     //ViewDragHelper子这里面,recyclerview,drawerlayout等内部都依赖了它
-    val customview="androidx.customview:customview:${Versions.customview}"
+    val customview = "androidx.customview:customview:${Versions.customview}"
+
     //原来的com.android.support:design  com.google.android.material:material-rc01 没找到
-    val material="com.google.android.material:material:${Versions.material}"
-    object Compose{
-        val material="androidx.compose.material:material:${Versions.compose_material}"
+    val material = "com.google.android.material:material:${Versions.material}"
+
+    object Compose {
+        val material = "androidx.compose.material:material:${Versions.compose_material}"
     }
 }
-
 
 
 object DataStore {
     val datastore_preferences = "androidx.datastore:datastore-preferences:${Versions.datastore}"
     val datastore = "androidx.datastore:datastore:${Versions.datastore}"
 }
-
 
 
 object Room {
@@ -131,17 +138,17 @@ object Room {
 object Deps {
 
 
-
     val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
 
 
 }
 
-object MapStruct{
-    val mapstruct_kotlin="com.github.pozo:mapstruct-kotlin:${Versions.mapstruct_kotlin}"
-    val mapstruct_kotlin_processor="com.github.pozo:mapstruct-kotlin-processor:${Versions.mapstruct_kotlin}"
+object MapStruct {
+    val mapstruct_kotlin = "com.github.pozo:mapstruct-kotlin:${Versions.mapstruct_kotlin}"
+    val mapstruct_kotlin_processor =
+        "com.github.pozo:mapstruct-kotlin-processor:${Versions.mapstruct_kotlin}"
 
-    val mapstruct="org.mapstruct:mapstruct:${Versions.mapstruct}"
+    val mapstruct = "org.mapstruct:mapstruct:${Versions.mapstruct}"
 }
 
 object HelperUtil {
@@ -183,8 +190,10 @@ object StartUp {
 object Koin {
     // Koin for Kotlin
     val koin_core = "org.koin:koin-core:${Versions.koin}"
+
     // Koin for Android
-    val koin_android="org.koin:koin-android:${Versions.koin}"
+    val koin_android = "org.koin:koin-android:${Versions.koin}"
+
     // Koin extended & experimental features
     val koin_core_ext = "org.koin:koin-core-ext:${Versions.koin}"
 

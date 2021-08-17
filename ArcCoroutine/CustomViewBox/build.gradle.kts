@@ -38,7 +38,8 @@ generalCommonDeps(KotlinCompilerVersion.VERSION)
 impl(
     Deps.appcompat,
     Widget.RecyclerView.recyclerview,
-    Widget.coordinatorlayout
+    Widget.coordinatorlayout,
+    Widget.constraintlayout
 )
 
 cmpOnly(project(":common"))

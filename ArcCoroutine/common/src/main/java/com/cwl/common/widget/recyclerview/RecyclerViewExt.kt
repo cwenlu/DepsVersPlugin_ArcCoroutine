@@ -116,12 +116,13 @@ fun RecyclerView.onItemLongClick2(onItemLongClick: (RecyclerView.ViewHolder, Int
 fun RecyclerView.addItemClickListener2(listener: OnItemClickListener) {
     val attachListener=object:RecyclerView.OnChildAttachStateChangeListener{
         override fun onChildViewAttachedToWindow(view: View) {
+            var holder = getChildViewHolder(view)
             view.setOnClickListener {
-                listener.onItemClick(getChildViewHolder(view), getChildAdapterPosition(view))
+                listener.onItemClick(holder, holder.bindingAdapterPosition)
             }
 
             view.setOnLongClickListener {
-                listener.onItemLongClick(getChildViewHolder(view), getChildAdapterPosition(view))
+                listener.onItemLongClick(holder, holder.bindingAdapterPosition)
                 true
             }
         }
@@ -139,7 +140,13 @@ fun RecyclerView.addItemClickListener2(listener: OnItemClickListener) {
 fun RecyclerView.addItemActionProcessListener(attachStateChange:(viewHolder: RecyclerView.ViewHolder, position: Int)->Unit){
     val attachListener=object:RecyclerView.OnChildAttachStateChangeListener{
         override fun onChildViewAttachedToWindow(view: View) {
-            attachStateChange(getChildViewHolder(view), getChildAdapterPosition(view))
+//            attachStateChange(getChildViewHolder(view), getChildAdapterPosition(view)) //等同absoluteAdapterPosition
+            var holder = getChildViewHolder(view)
+
+            //如果你没有使用MergeAdapter，那么getBindingAdapterPosition()和getAbsoluteAdapterPosition()方法的效果是一模一样的。
+            //如果你使用了MergeAdapter，getBindingAdapterPosition()得到的是元素位于当前绑定Adapter的位置，而getAbsoluteAdapterPosition()方法得到的是元素位于合并后Adapter的绝对位置
+            attachStateChange(holder,holder.bindingAdapterPosition)
+//            attachStateChange(holder,holder.absoluteAdapterPosition)
         }
 
         override fun onChildViewDetachedFromWindow(view: View) {

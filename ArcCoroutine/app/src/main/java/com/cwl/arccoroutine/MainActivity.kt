@@ -1,16 +1,21 @@
 package com.cwl.arccoroutine
 
+import android.app.Application
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.cwl.arccoroutine.customview.CustomViewMainActivity
-import com.cwl.arccoroutine.test.databinding.DataBindingActivity
-import com.cwl.arccoroutine.test.rv.UseItemTouchHelperActivity
-import com.cwl.arccoroutine.test.paging.ui.PagingActivity
-import com.cwl.arccoroutine.test.rv.SnapHelperActivity
-import com.cwl.arccoroutine.test.viewpager2.ViewPager2MainActivity
+import com.cwl.arccoroutine.jectpack.TestActivity
+import com.cwl.arccoroutine.jectpack.databinding.DataBindingActivity
+import com.cwl.arccoroutine.jectpack.rv.UseItemTouchHelperActivity
+import com.cwl.arccoroutine.jectpack.paging.ui.PagingActivity
+import com.cwl.arccoroutine.jectpack.rv.SnapHelperActivity
+import com.cwl.arccoroutine.jectpack.viewpager2.ViewPager2MainActivity
 import com.cwl.arccoroutine.wanandroid.ui.hotarticles.HotArticlesActivity
 import com.cwl.arccoroutine.wanandroid.ui.hotarticles.HotArticlesPagingActivity
 import com.cwl.arccoroutine.wanandroid.ui.hotarticles.HotArticlesPagingActivity2
@@ -38,6 +43,7 @@ class MainActivity : AppCompatActivity(){
         listData.add("customview")
 
         listData.add("databinding")
+        listData.add("test")
         val recyclerView = RecyclerView(this)
         recyclerView.setupLayoutManager(3)
         recyclerView.gridDivider(2,Color.CYAN)
@@ -57,10 +63,14 @@ class MainActivity : AppCompatActivity(){
                 7->showActivity(CustomViewMainActivity::class)
 
                 8->showActivity(DataBindingActivity::class)
+                9->showActivity(TestActivity::class)
 
             }
         }
         recyclerView.adapter=multiTypeAdapter
         setContentView(recyclerView)
+
+
     }
+
 }

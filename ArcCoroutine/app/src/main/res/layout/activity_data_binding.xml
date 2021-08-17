@@ -6,10 +6,10 @@
     <data>
         <variable
                 name="vm"
-                type="com.cwl.arccoroutine.test.databinding.DataBindingHotArticlesViewModel" />
+                type="com.cwl.arccoroutine.jectpack.databinding.DataBindingHotArticlesViewModel" />
         <variable
                 name="action"
-                type="com.cwl.arccoroutine.test.databinding.ActionListener" />
+                type="com.cwl.arccoroutine.jectpack.databinding.ActionListener" />
 
     </data>
 
@@ -17,7 +17,7 @@
             android:id="@+id/refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".test.databinding.DataBindingActivity">
+            tools:context=".jectpack.databinding.DataBindingActivity">
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_list"

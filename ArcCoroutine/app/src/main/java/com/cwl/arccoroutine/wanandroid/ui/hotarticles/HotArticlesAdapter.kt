@@ -8,7 +8,6 @@ import androidx.annotation.LayoutRes
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.cwl.arccoroutine.test.paging.ui.PersonAdapter
 import com.cwl.arccoroutine.wanandroid.data.vo.hotarticles.HotArticlesVo
 
 /**

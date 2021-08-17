@@ -16,7 +16,9 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".test.databinding.DataBindingActivity"></activity>
+        <activity android:name=".customview.ConstraintLayoutActivity"></activity>
+        <activity android:name=".jectpack.TestActivity" />
+        <activity android:name=".jectpack.databinding.DataBindingActivity" />
         <activity android:name=".customview.LayoutManagerTestActivity" />
         <activity android:name=".customview.ScrollBehaviorActivity" />
         <activity android:name=".customview.SimpleBehaviorActivity" />
@@ -27,14 +29,14 @@
         <activity android:name=".customview.SimpleUseDragHelper1Activity" />
         <activity android:name=".customview.SimpleUseViewDragHelperActivity" />
         <activity android:name=".customview.CustomViewMainActivity" />
-        <activity android:name=".test.rv.SnapHelperActivity" />
-        <activity android:name=".test.viewpager2.ViewPager2MainActivity" />
+        <activity android:name=".jectpack.rv.SnapHelperActivity" />
+        <activity android:name=".jectpack.viewpager2.ViewPager2MainActivity" />
         <activity android:name=".wanandroid.ui.hotarticles.HotArticlesPagingActivity" />
         <activity android:name=".wanandroid.ui.hotarticles.HotArticlesPagingActivity2" />
         <activity android:name=".wanandroid.ui.hotarticles.HotArticlesActivity" />
         <activity android:name=".wanandroid.ui.WanMainActivity" />
-        <activity android:name=".test.paging.ui.PagingActivity" />
-        <activity android:name=".test.rv.UseItemTouchHelperActivity" />
+        <activity android:name=".jectpack.paging.ui.PagingActivity" />
+        <activity android:name=".jectpack.rv.UseItemTouchHelperActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,7 +52,7 @@
 
             <!-- 自动初始化 -->
             <meta-data
-                    android:name="com.cwl.arccoroutine.test.startup.LibraryB"
+                    android:name="com.cwl.arccoroutine.jectpack.startup.LibraryB"
                     android:value="androidx.startup" />
 
             <!--

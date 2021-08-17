@@ -1,7 +1,9 @@
 package com.cwl.arccoroutine
 
 import android.app.Application
-import com.cwl.arccoroutine.test.paging.di.appModuleTest
+import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.ViewModelStoreOwner
+import com.cwl.arccoroutine.jectpack.paging.di.appModuleTest
 import com.cwl.arccoroutine.wanandroid.di.appModule
 import com.cwl.common.imageloader.ImageLoaderOptions
 import com.cwl.common.imageloader.picasso.PicassoImageLoader
@@ -15,7 +17,7 @@ import org.koin.core.logger.Level
 
 //import com.cwl.okhttpdsl.http.interceptor.HttpLogInterceptor
 
-class App : Application() {
+class App : Application(), ViewModelStoreOwner {
 
     override fun onCreate() {
         super.onCreate()
@@ -43,7 +45,12 @@ class App : Application() {
             modules(appModuleTest)
             modules(appModule)
         }
+        mViewModelStore=ViewModelStore()
+    }
 
+    lateinit var mViewModelStore:ViewModelStore
+    override fun getViewModelStore(): ViewModelStore {
+        return mViewModelStore
     }
 
 
