@@ -9,6 +9,7 @@ import com.cwl.common.imageloader.ImageLoaderOptions
 import com.cwl.common.imageloader.picasso.PicassoImageLoader
 import com.cwl.common.imageloader.register
 import com.cwl.common.okhttp.OkHttpConfig
+import dagger.hilt.android.HiltAndroidApp
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -17,6 +18,7 @@ import org.koin.core.logger.Level
 
 //import com.cwl.okhttpdsl.http.interceptor.HttpLogInterceptor
 
+@HiltAndroidApp
 class App : Application(), ViewModelStoreOwner {
 
     override fun onCreate() {

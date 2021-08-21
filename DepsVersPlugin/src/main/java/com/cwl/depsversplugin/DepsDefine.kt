@@ -37,6 +37,7 @@ object Versions {
     val leakcanary = "2.5"
     val mapstruct_kotlin = "1.3.1.2"
     val mapstruct = "1.4.1.Final"
+    val hilt = "2.35"
 
     val material = "1.3.0-rc01"
 
@@ -249,6 +250,12 @@ object Lifecycle {
     // optional - ReactiveStreams support for LiveData
     val lifecycle_reactivestreams_ktx =
         "androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.lifecycle}"
+}
+
+object Hilt{
+    val hilt_android = "com.google.dagger:hilt-android:${Versions.hilt}"
+    val hilt_android_compiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
+    val hilt_plugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}"
 }
 
 object Kt {

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cwl.arccoroutine.customview.CustomViewMainActivity
 import com.cwl.arccoroutine.jectpack.TestActivity
 import com.cwl.arccoroutine.jectpack.databinding.DataBindingActivity
+import com.cwl.arccoroutine.jectpack.hilt.HiltActivity
 import com.cwl.arccoroutine.jectpack.rv.UseItemTouchHelperActivity
 import com.cwl.arccoroutine.jectpack.paging.ui.PagingActivity
 import com.cwl.arccoroutine.jectpack.rv.SnapHelperActivity
@@ -43,6 +44,7 @@ class MainActivity : AppCompatActivity(){
         listData.add("customview")
 
         listData.add("databinding")
+        listData.add("hilt")
         listData.add("test")
         val recyclerView = RecyclerView(this)
         recyclerView.setupLayoutManager(3)
@@ -63,7 +65,8 @@ class MainActivity : AppCompatActivity(){
                 7->showActivity(CustomViewMainActivity::class)
 
                 8->showActivity(DataBindingActivity::class)
-                9->showActivity(TestActivity::class)
+                9->showActivity(HiltActivity::class)
+                10->showActivity(TestActivity::class)
 
             }
         }

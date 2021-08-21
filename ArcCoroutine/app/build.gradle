@@ -1,12 +1,14 @@
-import com.cwl.depsversplugin.BuildConfig
-import com.cwl.depsversplugin.Image
-import com.cwl.depsversplugin.Room
-import com.cwl.depsversplugin.StartUp
-import com.cwl.depsversplugin.Koin
-import com.cwl.depsversplugin.Coroutines
-import com.cwl.depsversplugin.ViewBinding
-import com.cwl.depsversplugin.Widget
-import com.cwl.depsversplugin.MapStruct
+//import com.cwl.depsversplugin.BuildConfig
+//import com.cwl.depsversplugin.Image
+//import com.cwl.depsversplugin.Room
+//import com.cwl.depsversplugin.StartUp
+//import com.cwl.depsversplugin.Koin
+//import com.cwl.depsversplugin.Coroutines
+//import com.cwl.depsversplugin.ViewBinding
+//import com.cwl.depsversplugin.Widget
+//import com.cwl.depsversplugin.MapStruct
+//import com.cwl.depsversplugin.Hilt
+import com.cwl.depsversplugin.*
 
 apply plugin: 'com.android.application'
 
@@ -14,6 +16,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 apply plugin: 'kotlin-android-extensions'//已经被废弃了
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion 29
@@ -87,6 +90,8 @@ dependencies {
     implementation Widget.viewpager2
     implementation Widget.coordinatorlayout
     implementation Widget.material
+    implementation Hilt.hilt_android
+    kapt Hilt.hilt_android_compiler
 }
 
 
