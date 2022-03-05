@@ -39,7 +39,7 @@ class App : Application(), ViewModelStoreOwner {
             baseUrl="https://www.wanandroid.com/"
         }
 
-        PicassoImageLoader<ImageLoaderOptions>(this).register()
+        //PicassoImageLoader<ImageLoaderOptions>(this).register()
 
         startKoin {
             androidLogger(Level.DEBUG)

@@ -2,6 +2,8 @@ package com.cwl.arccoroutine.jectpack.hilt
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
+import android.widget.TextView
 import androidx.activity.viewModels
 import com.cwl.arccoroutine.R
 import com.cwl.arccoroutine.jectpack.hilt.bean.Book

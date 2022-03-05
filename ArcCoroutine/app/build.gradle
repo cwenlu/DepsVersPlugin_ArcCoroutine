@@ -77,12 +77,18 @@ dependencies {
     implementation Coroutines.kotlinx_coroutines_android
     implementation Koin.koin_android
     implementation Koin.koin_androidx_viewmodel
-    implementation Room.room_runtime
-    kapt Room.room_compiler
+    implementation (Room.room_runtime){
+        //兼容m1
+        exclude(group:'org.xerial')
+    }
+    kapt (Room.room_compiler){
+        //兼容m1
+        exclude(group:'org.xerial')
+    }
     implementation Widget.paging_runtime
     implementation StartUp.startup_runtime
     implementation ViewBinding.vbpd_noreflection
-    implementation Image.picasso
+//    implementation Image.picasso
     implementation Widget.swiperefreshlayout
     implementation MapStruct.mapstruct_kotlin
     kapt MapStruct.mapstruct_kotlin_processor
@@ -92,6 +98,8 @@ dependencies {
     implementation Widget.material
     implementation Hilt.hilt_android
     kapt Hilt.hilt_android_compiler
+    //兼容m1
+    implementation 'org.xerial:sqlite-jdbc:3.34.0'
 }
 
 
